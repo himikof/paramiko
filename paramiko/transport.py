@@ -1584,6 +1584,7 @@ class Transport (threading.Thread):
         for chan in self._channels.values():
             chan._unlink()
         if self.active:
+            self.server_object.handle_disconnect()
             self.active = False
             self.packetizer.close()
             if self.completion_event != None:

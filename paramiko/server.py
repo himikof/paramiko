@@ -534,6 +534,11 @@ class ServerInterface (object):
         """
         return OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED
 
+    def handle_disconnect(self):
+        """
+        This method is called in the event of connection termination.
+        """
+        pass
 
 class SubsystemHandler (threading.Thread):
     """
