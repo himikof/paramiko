@@ -537,6 +537,8 @@ class ServerInterface (object):
     def handle_disconnect(self):
         """
         This method is called in the event of connection termination.
+
+        By the time this method is called, L{Transport} is no longer active.
         """
         pass
 
