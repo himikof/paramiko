@@ -340,7 +340,7 @@ class SSHClient (object):
         self._transport.close()
         self._transport = None
 
-        if self._agent != None:
+        if self._agent is not None:
             self._agent.close()
             self._agent = None
 
@@ -441,7 +441,7 @@ class SSHClient (object):
                     saved_exception = e
 
         if allow_agent:
-            if self._agent == None:
+            if self._agent is None:
                 self._agent = Agent()
 
             for key in self._agent.get_keys():
