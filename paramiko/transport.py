@@ -1036,7 +1036,8 @@ class Transport (threading.Thread):
         Set the handler class for a subsystem in server mode.  If a request
         for this subsystem is made on an open ssh channel later, this handler
         will be constructed and called -- see L{SubsystemHandler} for more
-        detailed documentation.
+        detailed documentation. The handler class can be None, in which case
+        the specified subsystem handler is cleared.
 
         Any extra parameters (including keyword arguments) are saved and
         passed to the L{SubsystemHandler} constructor later.
@@ -1049,7 +1050,10 @@ class Transport (threading.Thread):
         """
         try:
             self.lock.acquire()
-            self.subsystem_table[name] = (handler, larg, kwarg)
+            if handler is None:
+                del self.subsystem_table[name]
+            else:
+                self.subsystem_table[name] = (handler, larg, kwarg)
         finally:
             self.lock.release()
 
