@@ -1590,7 +1590,8 @@ class Transport (threading.Thread):
             chan._unlink()
         if self.active:
             self.active = False
-            self.server_object.handle_disconnect()
+            if self.server_object is not None:
+                self.server_object.handle_disconnect()
             self.packetizer.close()
             if self.completion_event != None:
                 self.completion_event.set()
